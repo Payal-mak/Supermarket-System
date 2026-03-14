@@ -1,0 +1,81 @@
+# =========================
+# Node.js
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Logs
+# =========================
+logs
+*.log
+
+# =========================
+# Runtime data
+# =========================
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# =========================
+# Dependency directories
+# =========================
+node_modules/
+
+# =========================
+# Build folders
+# =========================
+dist/
+build/
+
+# React build output
+frontend/build/
+
+# =========================
+# Database
+# =========================
+*.sqlite
+*.db
+*.sql.bak
+*.dump
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# Temporary files
+# =========================
+tmp/
+temp/
+
+# =========================
+# Coverage reports
+# =========================
+coverage/
+
+# =========================
+# Package lock backups
+# =========================
+package-lock.json.*
