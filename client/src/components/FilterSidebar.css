@@ -1,7 +1,41 @@
-.filter-sidebar { padding: 1.25rem; }
-.filter-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
-.filter-header h3 { font-size: 1rem; color: var(--gray-800); }
-.filter-section { display: flex; flex-direction: column; gap: 0.5rem; }
-.filter-section h4 { font-size: 0.85rem; font-weight: 700; color: var(--gray-700); margin-bottom: 0.35rem; }
-.price-range-labels { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--gray-500); margin-bottom: 0.5rem; }
-.price-range-val { font-weight: 700; color: var(--green-700); }
+.filter-sidebar {
+    padding: 1.25rem;
+}
+
+.filter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.filter-header h3 {
+    font-size: 1rem;
+    color: var(--gray-800);
+}
+
+.filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-section h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--gray-700);
+    margin-bottom: 0.35rem;
+}
+
+.price-range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    margin-bottom: 0.5rem;
+}
+
+.price-range-val {
+    font-weight: 700;
+    color: var(--chilli);
+}

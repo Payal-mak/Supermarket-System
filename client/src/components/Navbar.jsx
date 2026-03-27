@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { categories } from '../data/mockData';
+import logo from '../assets/radhika-logo.png';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -24,8 +25,8 @@ export default function Navbar() {
       <div className="navbar-inner container">
         {/* Logo */}
         <Link to="/" className="navbar-logo" onClick={() => setMenuOpen(false)}>
-          <span className="logo-icon">🛒</span>
-          <span className="logo-text">Fresh<span>Mart</span></span>
+          <img src={logo} alt="Radhika Raj Enterprise" className="logo-img" />
+          <span className="logo-text">Radhika<span> Mall</span></span>
         </Link>
 
         {/* Desktop Search */}
@@ -89,7 +90,7 @@ export default function Navbar() {
 
       {/* Mobile Search */}
       <div className="mobile-search container hide-desktop">
-        <form onSubmit={handleSearch} style={{ display:'flex', gap:'0.5rem', width:'100%' }}>
+        <form onSubmit={handleSearch} style={{ display: 'flex', gap: '0.5rem', width: '100%' }}>
           <input
             className="form-input search-input"
             type="text"
@@ -119,7 +120,7 @@ export default function Navbar() {
             ))}
             <div className="divider" />
             <Link to="/dashboard" className="mobile-menu-link" onClick={() => setMenuOpen(false)}>👤 My Account</Link>
-            <Link to="/admin"     className="mobile-menu-link" onClick={() => setMenuOpen(false)}>⚙️ Admin Panel</Link>
+            <Link to="/admin" className="mobile-menu-link" onClick={() => setMenuOpen(false)}>⚙️ Admin Panel</Link>
           </div>
         </div>
       )}
