@@ -1,20 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 /* ===========================
-   CSS DESIGN TOKENS
+   CSS DESIGN TOKENS — Radhika Shopping Mall
    =========================== */
 :root {
+  /* Brand palette */
+  --farm-green:   #165F47;
+  --lettuce:      #2DA049;
+  --lemon-green:  #AED140;
+  --light-green:  #E3EA98;
+  --lemon:        #F6C817;
+  --pumpkin:      #F2923B;
+  --chilli:       #B91F3F;
+  --beetroot:     #8C4074;
+
+  /* Semantic tokens (mapped from palette) */
+  --primary:      var(--chilli);
+  --primary-dark: #961934;
+  --primary-light:#f5d0d8;
+  --secondary:    var(--lettuce);
+  --secondary-light: #d4f5dc;
+  --accent:       var(--lemon);
+  --accent-light: #fef9c3;
+  --warning:      var(--pumpkin);
+  --highlight:    var(--lemon-green);
+
+  /* Greens (for badges, success states) */
   --green-50:  #f0fdf4;
   --green-100: #dcfce7;
   --green-200: #bbf7d0;
   --green-400: #4ade80;
   --green-500: #22c55e;
-  --green-600: #16a34a;
-  --green-700: #15803d;
-  --green-800: #166534;
+  --green-600: var(--secondary);
+  --green-700: var(--farm-green);
+  --green-800: #0d3d2e;
 
   --orange-400: #fb923c;
-  --orange-500: #f97316;
+  --orange-500: var(--pumpkin);
 
   --gray-50:  #f9fafb;
   --gray-100: #f3f4f6;
@@ -98,17 +120,24 @@ p  { color: var(--gray-600); }
 }
 
 .btn-primary {
-  background: var(--green-600);
+  background: var(--primary);
   color: var(--white);
 }
-.btn-primary:hover { background: var(--green-700); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+.btn-secondary {
+  background: var(--accent);
+  color: var(--gray-900);
+  font-weight: 700;
+}
+.btn-secondary:hover { background: #e5b615; transform: translateY(-1px); box-shadow: var(--shadow-md); }
 
 .btn-outline {
   background: transparent;
-  border: 2px solid var(--green-600);
-  color: var(--green-600);
+  border: 2px solid var(--primary);
+  color: var(--primary);
 }
-.btn-outline:hover { background: var(--green-50); }
+.btn-outline:hover { background: var(--primary-light); }
 
 .btn-ghost {
   background: transparent;
@@ -151,10 +180,11 @@ p  { color: var(--gray-600); }
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
-.badge-green  { background: var(--green-100); color: var(--green-700); }
-.badge-orange { background: #fff7ed; color: var(--orange-500); }
+.badge-green  { background: var(--green-100); color: var(--farm-green); }
+.badge-orange { background: #fff7ed; color: var(--pumpkin); }
 .badge-red    { background: #fee2e2; color: #dc2626; }
 .badge-gray   { background: var(--gray-100); color: var(--gray-600); }
+.badge-chilli { background: var(--primary-light); color: var(--chilli); }
 
 /* ===========================
    FORM ELEMENTS
@@ -171,7 +201,7 @@ p  { color: var(--gray-600); }
   transition: var(--transition);
   background: var(--white);
 }
-.form-input:focus { outline: none; border-color: var(--green-500); box-shadow: 0 0 0 3px rgba(34,197,94,0.12); }
+.form-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(185,31,63,0.12); }
 
 select.form-input { appearance: none; }
 
@@ -185,7 +215,7 @@ select.form-input { appearance: none; }
    =========================== */
 .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
 .section-title  { font-size: 1.3rem; font-weight: 700; color: var(--gray-800); }
-.section-title span { color: var(--green-600); }
+.section-title span { color: var(--chilli); }
 
 /* ===========================
    EMPTY STATE
@@ -202,7 +232,7 @@ select.form-input { appearance: none; }
    =========================== */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--gray-100); }
-::-webkit-scrollbar-thumb { background: var(--green-400); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--chilli); border-radius: 3px; }
 
 /* ===========================
    RESPONSIVE HELPERS
@@ -239,12 +269,12 @@ select.form-input { appearance: none; }
 .qty-btn {
   width: 32px; height: 32px;
   background: var(--gray-50);
-  color: var(--green-600);
+  color: var(--primary);
   font-size: 1.1rem; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
   transition: var(--transition);
 }
-.qty-btn:hover { background: var(--green-50); }
+.qty-btn:hover { background: var(--primary-light); }
 .qty-value {
   min-width: 36px; text-align: center;
   font-weight: 700; font-size: 0.9rem; color: var(--gray-800);
@@ -254,14 +284,14 @@ select.form-input { appearance: none; }
    PRICE DISPLAY
    =========================== */
 .price-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
-.price-sell { font-size: 1.1rem; font-weight: 800; color: var(--green-700); }
+.price-sell { font-size: 1.1rem; font-weight: 800; color: var(--farm-green); }
 .price-mrp  { font-size: 0.85rem; color: var(--gray-400); text-decoration: line-through; }
-.price-disc { font-size: 0.75rem; font-weight: 700; color: var(--orange-500); }
+.price-disc { font-size: 0.75rem; font-weight: 700; color: var(--pumpkin); }
 
 /* ===========================
    STAR RATING
    =========================== */
-.stars { color: #fbbf24; font-size: 0.85rem; letter-spacing: 1px; }
+.stars { color: var(--lemon); font-size: 0.85rem; letter-spacing: 1px; }
 
 /* ===========================
    TABLE
@@ -279,14 +309,14 @@ tr:hover td { background: var(--gray-50); }
 input[type='range'] {
   -webkit-appearance: none;
   width: 100%; height: 4px;
-  background: var(--green-200);
+  background: var(--primary-light);
   border-radius: 2px; outline: none;
 }
 input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 16px; height: 16px;
   border-radius: 50%;
-  background: var(--green-600);
+  background: var(--primary);
   cursor: pointer;
   box-shadow: var(--shadow-sm);
 }
@@ -299,7 +329,7 @@ input[type='range']::-webkit-slider-thumb {
   font-size: 0.875rem; color: var(--gray-700);
   cursor: pointer; padding: 0.2rem 0;
 }
-.check-label input[type='checkbox'] { accent-color: var(--green-600); width: 15px; height: 15px; }
+.check-label input[type='checkbox'] { accent-color: var(--primary); width: 15px; height: 15px; }
 
 /* ===========================
    TAB BAR
@@ -310,13 +340,13 @@ input[type='range']::-webkit-slider-thumb {
   color: var(--gray-500); background: transparent; border-radius: var(--radius-sm) var(--radius-sm) 0 0;
   transition: var(--transition); border-bottom: 2px solid transparent; margin-bottom: -2px;
 }
-.tab-btn.active { color: var(--green-600); border-bottom-color: var(--green-600); background: var(--green-50); }
+.tab-btn.active { color: var(--chilli); border-bottom-color: var(--chilli); background: var(--primary-light); }
 .tab-btn:hover:not(.active) { background: var(--gray-100); color: var(--gray-700); }
 
 /* ===========================
    STATUS PILL
    =========================== */
-.status-completed  { background: var(--green-100); color: var(--green-700); }
-.status-pending    { background: #fff7ed; color: var(--orange-500); }
+.status-completed  { background: var(--green-100); color: var(--farm-green); }
+.status-pending    { background: #fff7ed; color: var(--pumpkin); }
 .status-processing { background: #eff6ff; color: #2563eb; }
 .status-cancelled  { background: #fee2e2; color: #dc2626; }
