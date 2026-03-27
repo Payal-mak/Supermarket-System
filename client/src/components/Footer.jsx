@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { categories } from '../data/mockData';
+import { categories, storeInfo } from '../data/mockData';
+import logo from '../assets/radhika-logo.png';
 import './Footer.css';
 
 export default function Footer() {
@@ -7,12 +8,18 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer-inner">
         <div className="footer-brand">
-          <div className="footer-logo">🛒 Fresh<span>Mart</span></div>
-          <p>Your daily grocery delivered fresh, fast, and at the best price.</p>
+          <div className="footer-logo">
+            <img src={logo} alt="Radhika Raj Enterprise" className="footer-logo-img" />
+            <div>
+              <div className="footer-logo-text">{storeInfo.name}</div>
+              <div className="footer-subbrand">{storeInfo.subBrand}</div>
+            </div>
+          </div>
+          <p>{storeInfo.address}</p>
           <div className="footer-badges">
-            <span>🔒 Secure Payments</span>
-            <span>🚚 Fast Delivery</span>
-            <span>✅ Quality Assured</span>
+            <span>🛍️ Quality Products</span>
+            <span>💰 Best Prices</span>
+            <span>🤝 Trusted Since Years</span>
           </div>
         </div>
 
@@ -42,14 +49,16 @@ export default function Footer() {
         <div className="footer-col">
           <h4>Contact Us</h4>
           <ul>
-            <li>📞 1800-123-4567</li>
-            <li>✉️ support@freshmart.in</li>
-            <li>⏰ Mon–Sat: 9AM – 6PM</li>
+            {storeInfo.owners.map((owner, i) => (
+              <li key={i}>📞 {owner.name} — Mo. {owner.phone}</li>
+            ))}
+            <li>📍 {storeInfo.address}</li>
+            <li>⏰ Mon–Sat: 9AM – 9PM</li>
           </ul>
         </div>
       </div>
       <div className="footer-bottom">
-        <p>© 2026 FreshMart. All rights reserved. Built with ❤️ in India.</p>
+        <p>© 2026 {storeInfo.name} ({storeInfo.subBrand}). All rights reserved. Made with ❤️ in Gondal, Gujarat.</p>
       </div>
     </footer>
   );
