@@ -12,6 +12,7 @@ import customerRoutes from "./routes/customerRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import inventoryRoutes from "./routes/inventoryRoutes.js";
 import supplierRoutes from "./routes/supplierRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
 
 // Import middleware
 import errorHandler from "./middleware/errorHandler.js";
@@ -30,6 +31,7 @@ app.use("/api/customers", customerRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/inventory", inventoryRoutes);
 app.use("/api/suppliers", supplierRoutes);
+app.use("/api/payments", paymentRoutes);
 
 // ─── Health Check ───────────────────────────────────────────────────────
 app.get("/api/health", (_req, res) => {
