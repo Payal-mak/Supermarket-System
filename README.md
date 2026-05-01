@@ -1,13 +1,20 @@
 # Supermarket Management System
 
-A full-stack supermarket management system designed for local retail stores.
+A full-stack supermarket management system designed for local retail stores.  
 The system manages products, inventory, suppliers, customers, and is designed to support future online ordering and delivery.
+
+## 🌐 Live Demo
+
+The application is currently deployed and accessible at: **http://100.29.14.148**
 
 ## Tech Stack
 
-* React + Vite (Frontend)
-* Node.js + Express (Backend)
-* PostgreSQL (Database)
+- **Frontend**: React + Vite
+- **Backend**: Node.js + Express
+- **Database**: PostgreSQL (AWS RDS)
+- **Hosting**: AWS EC2
+- **Web Server**: Nginx
+- **Process Management**: PM2
 
 ## Project Structure
 
@@ -18,7 +25,7 @@ supermarket-system/
 │   ├── db.js          # PostgreSQL connection
 │   ├── routes/        # Express route definitions
 │   ├── controllers/   # Business logic
-│   └── middleware/     # Error handling, etc.
+│   └── middleware/    # Error handling, etc.
 ├── frontend/          # React + Vite application
 │   ├── src/
 │   │   ├── components/
@@ -34,21 +41,24 @@ supermarket-system/
 
 ## Features
 
-* Product catalog with categories
-* Category management
-* Supplier management
-* Inventory tracking
-* Stock movement history
-* Customer management
-* Order system (future)
-* Delivery system (future)
+- Product catalog with categories
+- Category management
+- Supplier management
+- Inventory tracking
+- Stock movement history
+- Customer management
+- Comprehensive client-side form validations with clear error messages
+- Admin Reports dashboard (Daily, Monthly, Yearly views)
+- Secure payment gateway integration (Razorpay)
+- Order system (future)
+- Delivery system (future)
 
 ## Setup
 
 ### Prerequisites
 
-* Node.js (v18+)
-* PostgreSQL
+- Node.js (v18+)
+- PostgreSQL
 
 ### Clone the repository
 
@@ -126,19 +136,21 @@ cd frontend
 npm run dev
 ```
 
-### API Endpoints
+## API Endpoints
 
-| Resource     | Method | Endpoint                        | Description          |
-|-------------|--------|----------------------------------|----------------------|
-| Products    | GET    | `/api/products`                  | List all products    |
-| Products    | GET    | `/api/products/:id`              | Get a product        |
-| Products    | POST   | `/api/products`                  | Create a product     |
-| Products    | PUT    | `/api/products/:id`              | Update a product     |
-| Products    | DELETE | `/api/products/:id`              | Delete a product     |
-| Categories  | GET    | `/api/categories`                | List all categories  |
-| Customers   | GET    | `/api/customers`                 | List all customers   |
-| Orders      | GET    | `/api/orders`                    | List all orders      |
-| Orders      | POST   | `/api/orders`                    | Create an order      |
-| Inventory   | GET    | `/api/inventory`                 | List all inventory   |
-| Suppliers   | GET    | `/api/suppliers`                 | List all suppliers   |
-| Health      | GET    | `/api/health`                    | Health check         |
+| Resource   | Method | Endpoint           | Description         |
+|------------|--------|--------------------|---------------------|
+| Products   | GET    | `/api/products`    | List all products   |
+| Products   | GET    | `/api/products/:id`| Get a product       |
+| Products   | POST   | `/api/products`    | Create a product    |
+| Products   | PUT    | `/api/products/:id`| Update a product    |
+| Products   | DELETE | `/api/products/:id`| Delete a product    |
+| Categories | GET    | `/api/categories`  | List all categories |
+| Customers  | GET    | `/api/customers`   | List all customers  |
+| Orders     | GET    | `/api/orders`      | List all orders     |
+| Orders     | POST   | `/api/orders`      | Create an order     |
+| Inventory  | GET    | `/api/inventory`   | List all inventory  |
+| Suppliers  | GET    | `/api/suppliers`   | List all suppliers  |
+| Payments   | POST   | `/api/payments/create-order` | Create Razorpay order |
+| Payments   | POST   | `/api/payments/verify` | Verify payment signature |
+| Health     | GET    | `/api/health`      | Health check        |
