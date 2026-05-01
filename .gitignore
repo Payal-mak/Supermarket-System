@@ -38,9 +38,7 @@ node_modules/
 # =========================
 dist/
 build/
-
-# React build output
-frontend/build/
+frontend/dist/
 
 # =========================
 # Database
