@@ -1,5 +1,17 @@
 {
-  "dependencies": {
-    "pg": "^8.20.0"
+  "name": "supermarket-system",
+  "version": "1.0.0",
+  "description": "Full-stack supermarket management system",
+  "private": true,
+  "scripts": {
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "start:backend": "cd backend && npm start"
+  },
+  "devDependencies": {
+    "xlsx": "^0.18.5"
   }
 }
