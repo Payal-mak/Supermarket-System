@@ -73,16 +73,16 @@ export default function CartPage() {
             <div className="divider" />
             <div className="summary-row"><span>Subtotal ({itemCount} items)</span><span>₹{subtotal.toFixed(2)}</span></div>
             <div className="summary-row"><span>GST & Taxes</span><span>₹{gstAmount.toFixed(2)}</span></div>
-            <div className="summary-row"><span>Delivery</span><span className="free-delivery">{subtotal >= 299 ? 'FREE' : '₹49'}</span></div>
+            <div className="summary-row"><span>Delivery</span><span className="free-delivery">{total >= 299 ? 'FREE' : '₹49'}</span></div>
             {savings > 0 && <div className="summary-row savings-row"><span>Savings</span><span>-₹{savings.toFixed(2)}</span></div>}
             <div className="divider" />
             <div className="summary-row total-row">
               <span>Total Amount</span>
-              <span>₹{(subtotal >= 299 ? total : total + 49).toFixed(2)}</span>
+              <span>₹{(total >= 299 ? total : total + 49).toFixed(2)}</span>
             </div>
-            {subtotal < 299 && (
+            {total < 299 && (
               <p className="free-delivery-note">
-                Add ₹{(299 - subtotal).toFixed(0)} more for FREE delivery!
+                Add ₹{(299 - total).toFixed(0)} more for FREE delivery!
               </p>
             )}
             <button

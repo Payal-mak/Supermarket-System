@@ -22,6 +22,7 @@
   gap: 0.5rem;
   text-decoration: none;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .logo-img {
@@ -73,6 +74,7 @@
   align-items: center;
   justify-content: center;
   transition: var(--transition);
+  flex-shrink: 0;
 }
 
 .search-btn:hover {
@@ -104,6 +106,10 @@
 .nav-admin {
   color: var(--gray-500);
   font-size: 0.8rem;
+}
+
+.nav-logout-btn {
+  margin-left: 0.25rem;
 }
 
 /* Categories dropdown */
@@ -201,11 +207,31 @@
   display: flex;
 }
 
+.mobile-search-form {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  position: relative;
+}
+
+.mobile-search-form .search-input {
+  flex: 1;
+  padding-right: 3rem !important;
+}
+
+.mobile-search-btn {
+  position: absolute;
+  right: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .mobile-actions {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin-left: auto;
+  flex-shrink: 0;
 }
 
 .cart-btn-mobile {
@@ -229,6 +255,37 @@
   animation: fadeUp 0.2s ease;
 }
 
+.mobile-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.mobile-user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--chilli);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mobile-user-info strong {
+  font-size: 0.9rem;
+  color: var(--gray-800);
+}
+
+.mobile-user-info p {
+  font-size: 0.75rem;
+  color: var(--gray-500);
+}
+
 .mobile-menu-label {
   font-size: 0.75rem;
   font-weight: 700;
@@ -248,14 +305,38 @@
   color: var(--gray-700);
   border-bottom: 1px solid var(--gray-50);
   transition: var(--transition);
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
 }
 
 .mobile-menu-link:hover {
   color: var(--chilli);
 }
 
+.mobile-logout-btn {
+  color: #dc2626;
+  border-bottom: none;
+  margin-top: 0.25rem;
+}
+
+.mobile-logout-btn:hover {
+  color: #b91c1c;
+}
+
 @media (max-width: 768px) {
   .navbar-inner {
     flex-wrap: nowrap;
+    overflow: hidden;
+  }
+
+  .logo-img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .logo-text {
+    font-size: 1rem;
   }
 }

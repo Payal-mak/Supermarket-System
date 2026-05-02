@@ -1,11 +1,29 @@
 import { useState } from 'react';
-import { currentUser, orders, addresses } from '../data/mockData';
+import { useAuth } from '../context/AuthContext';
+import { orders, addresses as initialAddresses } from '../data/mockData';
 import './DashboardPage.css';
 
 const STATUS_CLASS = { completed: 'status-completed', processing: 'status-processing', pending: 'status-pending', cancelled: 'status-cancelled' };
 
 export default function DashboardPage() {
+  const { user } = useAuth();
   const [tab, setTab] = useState('orders');
+  const [addresses, setAddresses] = useState(initialAddresses);
+  const [showAddAddr, setShowAddAddr] = useState(false);
+  const [newAddr, setNewAddr] = useState({ address_line: '', city: '', state: '', pincode: '' });
+
+  const handleAddAddress = (e) => {
+    e.preventDefault();
+    if (!newAddr.address_line || !newAddr.city || !newAddr.pincode) return alert('Please fill required fields');
+    setAddresses([...addresses, { address_id: Date.now(), ...newAddr }]);
+    setShowAddAddr(false);
+    setNewAddr({ address_line: '', city: '', state: '', pincode: '' });
+  };
+
+  const handleProfileSave = (e) => {
+    e.preventDefault();
+    alert('Profile saved successfully!');
+  };
 
   return (
     <div className="dashboard page-enter">
@@ -13,10 +31,10 @@ export default function DashboardPage() {
 
         {/* Profile header */}
         <div className="dash-hero card">
-          <div className="dash-avatar">{currentUser.first_name[0]}{currentUser.last_name[0]}</div>
+          <div className="dash-avatar">{user?.first_name?.[0] || 'U'}{user?.last_name?.[0] || ''}</div>
           <div>
-            <h2>{currentUser.first_name} {currentUser.last_name}</h2>
-            <p>📞 {currentUser.phone} &nbsp;·&nbsp; ✉️ {currentUser.email}</p>
+            <h2>{user?.first_name} {user?.last_name}</h2>
+            <p>📞 {user?.phone || 'Not provided'} &nbsp;·&nbsp; ✉️ {user?.email || 'Not provided'}</p>
             <span className="badge badge-green">🌟 Regular Customer</span>
           </div>
           <div className="dash-stats">
@@ -85,7 +103,7 @@ export default function DashboardPage() {
                 <div key={addr.address_id} className="addr-block card">
                   <div className="addr-block-icon">📍</div>
                   <div>
-                    <strong>{currentUser.first_name} {currentUser.last_name}</strong>
+                    <strong>{user?.first_name} {user?.last_name}</strong>
                     <p>{addr.address_line}</p>
                     <p>{addr.city}, {addr.state}</p>
                     <p>Pincode: {addr.pincode}</p>
@@ -96,46 +114,76 @@ export default function DashboardPage() {
                   </div>
                 </div>
               ))}
-              <div className="addr-block addr-add card">
-                <div className="add-addr-icon">+</div>
-                <p>Add New Address</p>
-              </div>
+              {showAddAddr ? (
+                <div className="addr-block card" style={{ gridColumn: '1 / -1' }}>
+                  <h4 style={{ marginBottom: '1rem' }}>Add New Address</h4>
+                  <form onSubmit={handleAddAddress} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    <div className="form-group">
+                      <label className="form-label">Address Line</label>
+                      <input className="form-input" required value={newAddr.address_line} onChange={e => setNewAddr({...newAddr, address_line: e.target.value})} placeholder="House No, Building, Street, Area" />
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                      <div className="form-group">
+                        <label className="form-label">City</label>
+                        <input className="form-input" required value={newAddr.city} onChange={e => setNewAddr({...newAddr, city: e.target.value})} />
+                      </div>
+                      <div className="form-group">
+                        <label className="form-label">State</label>
+                        <input className="form-input" required value={newAddr.state} onChange={e => setNewAddr({...newAddr, state: e.target.value})} />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label className="form-label">Pincode</label>
+                      <input className="form-input" required value={newAddr.pincode} onChange={e => setNewAddr({...newAddr, pincode: e.target.value})} />
+                    </div>
+                    <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+                      <button type="submit" className="btn btn-primary">Save Address</button>
+                      <button type="button" className="btn btn-outline" onClick={() => setShowAddAddr(false)}>Cancel</button>
+                    </div>
+                  </form>
+                </div>
+              ) : (
+                <div className="addr-block addr-add card" onClick={() => setShowAddAddr(true)} style={{ cursor: 'pointer' }}>
+                  <div className="add-addr-icon">+</div>
+                  <p>Add New Address</p>
+                </div>
+              )}
             </div>
           </div>
         )}
 
         {/* PROFILE */}
         {tab === 'profile' && (
-          <div className="page-enter profile-form card">
+          <form className="page-enter profile-form card" onSubmit={handleProfileSave}>
             <h3 style={{marginBottom:'1.25rem'}}>Edit Profile</h3>
             <div className="pf-grid">
               <div className="form-group">
                 <label className="form-label">First Name</label>
-                <input className="form-input" defaultValue={currentUser.first_name} />
+                <input className="form-input" defaultValue={user?.first_name} required />
               </div>
               <div className="form-group">
                 <label className="form-label">Last Name</label>
-                <input className="form-input" defaultValue={currentUser.last_name} />
+                <input className="form-input" defaultValue={user?.last_name} required />
               </div>
               <div className="form-group">
                 <label className="form-label">Phone</label>
-                <input className="form-input" defaultValue={currentUser.phone} />
+                <input className="form-input" defaultValue={user?.phone} />
               </div>
               <div className="form-group">
                 <label className="form-label">Email</label>
-                <input className="form-input" defaultValue={currentUser.email} />
+                <input className="form-input" type="email" defaultValue={user?.email} />
               </div>
             </div>
             <div className="form-group" style={{marginTop:'0.75rem'}}>
               <label className="form-label">Current Password</label>
-              <input className="form-input" type="password" placeholder="Enter current password" />
+              <input className="form-input" type="password" placeholder="Enter current password to save changes" required />
             </div>
             <div className="form-group" style={{marginTop:'0.5rem'}}>
               <label className="form-label">New Password</label>
-              <input className="form-input" type="password" placeholder="Enter new password" />
+              <input className="form-input" type="password" placeholder="Enter new password (optional)" />
             </div>
-            <button className="btn btn-primary" style={{marginTop:'1.25rem'}}>Save Changes</button>
-          </div>
+            <button type="submit" className="btn btn-primary" style={{marginTop:'1.25rem'}}>Save Changes</button>
+          </form>
         )}
 
       </div>

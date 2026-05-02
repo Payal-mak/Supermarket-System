@@ -296,7 +296,10 @@ select.form-input { appearance: none; }
 /* ===========================
    TABLE
    =========================== */
-.table-wrap { overflow-x: auto; }
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
 th { background: var(--gray-50); color: var(--gray-600); font-weight: 600;
      padding: 0.8rem 1rem; text-align: left; border-bottom: 1.5px solid var(--gray-200); }
@@ -334,7 +337,14 @@ input[type='range']::-webkit-slider-thumb {
 /* ===========================
    TAB BAR
    =========================== */
-.tab-bar { display: flex; gap: 0.25rem; border-bottom: 2px solid var(--gray-200); margin-bottom: 1.5rem; }
+.tab-bar {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 2px solid var(--gray-200);
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 .tab-btn {
   padding: 0.6rem 1.25rem; font-size: 0.9rem; font-weight: 600;
   color: var(--gray-500); background: transparent; border-radius: var(--radius-sm) var(--radius-sm) 0 0;
@@ -342,6 +352,42 @@ input[type='range']::-webkit-slider-thumb {
 }
 .tab-btn.active { color: var(--chilli); border-bottom-color: var(--chilli); background: var(--primary-light); }
 .tab-btn:hover:not(.active) { background: var(--gray-100); color: var(--gray-700); }
+
+/* ===========================
+   MOBILE-FIRST POLISH
+   =========================== */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  .section {
+    padding: 1.5rem 0;
+  }
+
+  .btn {
+    min-height: 44px;
+  }
+
+  .tab-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+  }
+
+  table {
+    font-size: 0.8rem;
+  }
+
+  th, td {
+    padding: 0.6rem 0.75rem;
+  }
+}
 
 /* ===========================
    STATUS PILL

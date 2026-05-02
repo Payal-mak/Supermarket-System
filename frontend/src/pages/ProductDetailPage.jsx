@@ -23,8 +23,9 @@ export default function ProductDetailPage() {
   const qty      = getQty(product.product_id);
   const disc     = discount(price.mrp, price.selling_price);
   const inStock  = stock?.quantity > 0;
-  const gstAmt   = ((price.selling_price * price.gst_percent) / 100).toFixed(2);
-  const finalPri = (parseFloat(price.selling_price) + parseFloat(gstAmt)).toFixed(2);
+  const basePrice = price.selling_price / (1 + price.gst_percent / 100);
+  const gstAmt   = (price.selling_price - basePrice).toFixed(2);
+  const finalPri = parseFloat(price.selling_price).toFixed(2);
 
   const similar  = getAllProductsWithDetails()
     .filter(p => p.category_id === product.category_id && p.product_id !== product.product_id)

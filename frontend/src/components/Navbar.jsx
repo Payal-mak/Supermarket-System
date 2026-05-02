@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { categories } from '../data/mockData';
 import logo from '../assets/radhika-logo.png';
 import './Navbar.css';
 
 export default function Navbar() {
   const { itemCount } = useCart();
+  const { user, isAdmin, logout } = useAuth();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,6 +20,12 @@ export default function Navbar() {
       navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery('');
     }
+  };
+
+  const handleLogout = () => {
+    logout();
+    setMenuOpen(false);
+    navigate('/');
   };
 
   return (
@@ -66,14 +74,23 @@ export default function Navbar() {
             )}
           </div>
 
-          <Link to="/dashboard" className="nav-link">My Account</Link>
-          <Link to="/admin" className="nav-link nav-admin">Admin</Link>
+          <Link to="/dashboard" className="nav-link">
+            {user ? `👤 ${user.first_name}` : 'My Account'}
+          </Link>
+
+          {isAdmin && (
+            <Link to="/admin" className="nav-link nav-admin">⚙️ Panel</Link>
+          )}
 
           <Link to="/cart" className="cart-btn">
             <span>🛒</span>
             <span>Cart</span>
             {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
           </Link>
+
+          <button className="btn btn-ghost btn-sm nav-logout-btn" onClick={handleLogout}>
+            Logout
+          </button>
         </nav>
 
         {/* Mobile: cart + hamburger */}
@@ -90,16 +107,15 @@ export default function Navbar() {
 
       {/* Mobile Search */}
       <div className="mobile-search container hide-desktop">
-        <form onSubmit={handleSearch} style={{ display: 'flex', gap: '0.5rem', width: '100%' }}>
+        <form className="mobile-search-form" onSubmit={handleSearch}>
           <input
             className="form-input search-input"
             type="text"
             placeholder="Search products…"
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            style={{ flex: 1 }}
           />
-          <button type="submit" className="search-btn">🔍</button>
+          <button type="submit" className="search-btn mobile-search-btn">🔍</button>
         </form>
       </div>
 
@@ -107,6 +123,16 @@ export default function Navbar() {
       {menuOpen && (
         <div className="mobile-menu">
           <div className="container">
+            {user && (
+              <div className="mobile-user-info">
+                <span className="mobile-user-avatar">{user.first_name?.[0]}{user.last_name?.[0]}</span>
+                <div>
+                  <strong>{user.first_name} {user.last_name}</strong>
+                  <p>{user.role === 'admin' ? '⚙️ Admin' : '🛍️ Customer'}</p>
+                </div>
+              </div>
+            )}
+            <div className="divider" />
             <p className="mobile-menu-label">Categories</p>
             {categories.map(cat => (
               <Link
@@ -120,7 +146,12 @@ export default function Navbar() {
             ))}
             <div className="divider" />
             <Link to="/dashboard" className="mobile-menu-link" onClick={() => setMenuOpen(false)}>👤 My Account</Link>
-            <Link to="/admin" className="mobile-menu-link" onClick={() => setMenuOpen(false)}>⚙️ Admin Panel</Link>
+            {isAdmin && (
+              <Link to="/admin" className="mobile-menu-link" onClick={() => setMenuOpen(false)}>⚙️ Admin Panel</Link>
+            )}
+            <button className="mobile-menu-link mobile-logout-btn" onClick={handleLogout}>
+              🚪 Logout
+            </button>
           </div>
         </div>
       )}

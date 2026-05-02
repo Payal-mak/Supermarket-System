@@ -13,6 +13,7 @@ import orderRoutes from "./routes/orderRoutes.js";
 import inventoryRoutes from "./routes/inventoryRoutes.js";
 import supplierRoutes from "./routes/supplierRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 
 // Import middleware
 import errorHandler from "./middleware/errorHandler.js";
@@ -25,6 +26,7 @@ app.use(cors());
 app.use(express.json());
 
 // ─── API Routes ─────────────────────────────────────────────────────────
+app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/customers", customerRoutes);

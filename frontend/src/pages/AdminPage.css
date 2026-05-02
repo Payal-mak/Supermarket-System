@@ -13,6 +13,17 @@
 
 .admin-thumb { width: 44px; height: 44px; border-radius: var(--radius-sm); object-fit: cover; }
 
+/* Table wrapper — prevents overflow on mobile */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-md);
+}
+
+.table-wrap table {
+  min-width: 700px;
+}
+
 .inv-adjust {
   display: flex; align-items: center; gap: 0;
   border: 1.5px solid var(--gray-200); border-radius: var(--radius-full);
@@ -29,6 +40,9 @@
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
 }
 
 .report-subtab {
@@ -40,6 +54,8 @@
   border-radius: var(--radius-full);
   transition: var(--transition);
   cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .report-subtab.active {
@@ -67,7 +83,7 @@
 
 .report-kpis {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 0.75rem;
   margin-bottom: 1.5rem;
 }
@@ -94,6 +110,8 @@
 .report-section {
   padding: 1.25rem;
   margin-bottom: 1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .report-section h4 {
@@ -114,6 +132,7 @@
   height: 180px;
   padding: 0.5rem 0;
   border-bottom: 2px solid var(--gray-200);
+  min-width: 300px;
 }
 
 .bar-chart-monthly {
@@ -209,11 +228,80 @@
   text-align: right;
 }
 
+/* ===========================
+   RESPONSIVE
+   =========================== */
+
 @media (max-width: 768px) {
-  .admin-header { flex-direction: column; }
-  .admin-kpis   { width: 100%; }
-  .report-kpis  { grid-template-columns: 1fr 1fr; }
-  .bar-chart    { height: 140px; }
-  .bar-label    { display: none; }
-  .pay-method   { min-width: 60px; font-size: 0.7rem; }
+  .admin-page {
+    padding: 1rem 0 2rem;
+  }
+
+  .admin-header {
+    flex-direction: column;
+  }
+
+  .admin-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .admin-kpis {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .kpi-card {
+    padding: 0.65rem 0.85rem;
+  }
+
+  .kpi-card strong {
+    font-size: 1rem;
+  }
+
+  .admin-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .report-kpis {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .report-kpi {
+    padding: 0.75rem;
+  }
+
+  .report-kpi strong {
+    font-size: 1rem;
+  }
+
+  .bar-chart {
+    height: 140px;
+  }
+
+  .bar-label {
+    display: none;
+  }
+
+  .pay-method {
+    min-width: 60px;
+    font-size: 0.7rem;
+  }
+
+  .pay-amount {
+    font-size: 0.7rem;
+    min-width: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-kpis {
+    grid-template-columns: 1fr;
+  }
+
+  .report-kpis {
+    grid-template-columns: 1fr;
+  }
 }

@@ -48,12 +48,13 @@ export function CartProvider({ children }) {
   const clearCart  = useCallback(() => dispatch({ type: 'CLEAR_CART' }), []);
 
   const itemCount    = state.items.reduce((s, i) => s + i.quantity, 0);
-  const subtotal     = state.items.reduce((s, i) => s + i.price.selling_price * i.quantity, 0);
+  const total        = state.items.reduce((s, i) => s + i.price.selling_price * i.quantity, 0);
   const gstAmount    = state.items.reduce((s, i) => {
-    const gst = (i.price.selling_price * i.price.gst_percent) / 100;
+    const base = i.price.selling_price / (1 + i.price.gst_percent / 100);
+    const gst = i.price.selling_price - base;
     return s + gst * i.quantity;
   }, 0);
-  const total        = subtotal + gstAmount;
+  const subtotal     = total - gstAmount;
   const savings      = state.items.reduce((s, i) => s + (i.price.mrp - i.price.selling_price) * i.quantity, 0);
 
   const isInCart = (id) => state.items.some(i => i.product_id === id);
